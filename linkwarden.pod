@@ -1,0 +1,9 @@
+[Unit]
+Description = Linkwarden Stack
+
+[Pod]
+PodName=linkwarden
+PublishPort=localhost:3000:3000
+
+[Install]
+WantedBy=default.target
