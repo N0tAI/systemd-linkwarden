@@ -1,0 +1,12 @@
+[Unit]
+Description=Linkwarden Postgres Database
+
+[Container]
+Image=docker.io/library/postgres:18-alpine
+EnvironmentFile=%E/containers/systemd/linkwarden-postgres.env
+Secret=linkwarden_postgres_password,type=env,target=POSTGRES_PASSWORD
+Volume=linkwarden_pgdata:/var/lib/postgresql/data:Z
+Pod=linkwarden.pod
+
+[Service]
+Restart=always

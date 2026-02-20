@@ -1,0 +1,12 @@
+[Unit]
+Description=Linkwarden Meilisearch Engine
+
+[Container]
+Pod=linkwarden.pod
+Image=docker.io/getmeili/meilisearch:v1.12.8
+EnvironmentFile=%E/containers/systemd/linkwarden-meilisearch.env
+# Secret=linkwarden_meili_master_key,type=env,target=MEILI_MASTER_KEY
+Volume=linkwarden_meilidata:/meili_data:Z
+
+[Service]
+Restart=always

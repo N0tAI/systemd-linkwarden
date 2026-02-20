@@ -1,0 +1,20 @@
+[Unit]
+Description=Linkwarden Application
+Requires=linkwarden-meilisearch.service
+After=linkwarden-meilisearch.service
+Requires=linkwarden-postgres.service
+After=linkwarden-postgres.service
+
+[Container]
+Pod=linkwarden.pod
+Image=ghcr.io/linkwarden/linkwarden:v2.13.5
+Secret=linkwarden_nextauth,type=env,target=NEXTAUTH_SECRET
+Secret=linkwarden_meili_master_key,type=env,target=MEILI_MASTER_KEY
+Secret=linkwarden_postgres_password,type=env,target=POSTGRES_PASSWORD
+Secret=linkwarden_llm_api_key,type=env,target=OPENROUTER_API_KEY
+Secret=linkwarden_db_url,type=env,target=DATABASE_URL
+EnvironmentFile=%E/containers/systemd/linkwarden.env
+Volume=linkwarden_data:/data/data:Z
+
+[Service]
+Restart=always
